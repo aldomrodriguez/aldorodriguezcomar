@@ -1,0 +1,43 @@
+---
+import { Image } from "astro:assets";
+import type { ProjectEntry } from "../lib/projects";
+
+type Props = { images: ProjectEntry["data"]["gallery"] };
+
+const { images } = Astro.props;
+const desktop = images.filter((image) => image.device === "desktop");
+const mobile = images.filter((image) => image.device === "mobile");
+const frame = "h-auto w-full rounded-xl border border-black/10 shadow-sm dark:border-white/10";
+const caption = "mt-2 text-xs leading-relaxed text-neutral-500";
+---
+
+<!-- Escritorio a todo el ancho; celular en columnas. Cada imagen abre su versión completa. -->
+<div class="space-y-10">
+  {
+    desktop.map((image) => (
+      <figure>
+        <a href={image.src.src} target="_blank" rel="noopener" class="block transition hover:opacity-90" aria-label={`Abrir en tamaño completo: ${image.alt}`}>
+          <Image src={image.src} alt={image.alt} widths={[640, 960, 1440]} sizes="(min-width: 768px) 704px, 92vw" class={frame} />
+        </a>
+        <figcaption class={caption}>{image.caption}</figcaption>
+      </figure>
+    ))
+  }
+
+  {
+    mobile.length > 0 && (
+      <ul class="grid grid-cols-2 gap-4 sm:grid-cols-3">
+        {mobile.map((image) => (
+          <li>
+            <figure>
+              <a href={image.src.src} target="_blank" rel="noopener" class="block transition hover:opacity-90" aria-label={`Abrir en tamaño completo: ${image.alt}`}>
+                <Image src={image.src} alt={image.alt} widths={[240, 390, 780]} sizes="(min-width: 640px) 225px, 45vw" class={frame} />
+              </a>
+              <figcaption class={caption}>{image.caption}</figcaption>
+            </figure>
+          </li>
+        ))}
+      </ul>
+    )
+  }
+</div>

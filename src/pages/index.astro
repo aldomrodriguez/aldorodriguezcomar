@@ -11,7 +11,10 @@ import StackMarquee from "../components/StackMarquee.astro";
 import HighlightList from "../components/HighlightList.astro";
 import CallToAction from "../components/CallToAction.astro";
 import Connect from "../components/Connect.astro";
-import { profile, projects } from "../data/profile";
+import { profile } from "../data/profile";
+import { getProjects } from "../lib/projects";
+
+const projects = await getProjects();
 
 const today = new Intl.DateTimeFormat("es-AR", { day: "numeric", month: "long", year: "numeric" }).format(new Date());
 ---
@@ -26,7 +29,7 @@ const today = new Intl.DateTimeFormat("es-AR", { day: "numeric", month: "long", 
   <Section title="Proyectos" id="proyectos">
     <!-- "group": al pasar por una tarjeta, las demás se atenúan -->
     <div class="group grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-3">
-      {projects.map((project) => <ProjectCard project={project} />)}
+      {projects.map((entry) => <ProjectCard entry={entry} />)}
     </div>
   </Section>
 

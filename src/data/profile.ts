@@ -65,48 +65,6 @@ export const experience: Experience[] = [
   },
 ];
 
-export type Project = {
-  title: string;
-  description: string;
-  href: string;
-  tags: string[];
-  // Imagen en /public. Si falta, se muestra una portada generada.
-  cover?: string;
-  hue: number;
-};
-
-// PRUEBA: todos los proyectos son de ejemplo.
-export const projects: Project[] = [
-  {
-    title: "Menú Digital",
-    description: "Menú interactivo con QR para restaurantes, con panel para editar platos y precios.",
-    href: "#",
-    tags: ["Astro", "TypeScript", "Tailwind", "QR", "PWA"],
-    hue: 20,
-  },
-  {
-    title: "Tienda Online",
-    description: "E-commerce con catálogo, carrito y pagos integrados para un comercio local.",
-    href: "#",
-    tags: ["Next.js", "Stripe", "PostgreSQL", "Prisma"],
-    hue: 200,
-  },
-  {
-    title: "Web Institucional",
-    description: "Sitio institucional con blog y formulario de contacto, optimizado para SEO.",
-    href: "#",
-    tags: ["Astro", "SEO", "CMS"],
-    hue: 140,
-  },
-  {
-    title: "Sistema de Gestión",
-    description: "Gestión de stock, ventas y clientes para una pyme, con reportes en tiempo real.",
-    href: "#",
-    tags: ["Node.js", "React", "MySQL", "Docker", "Reportes"],
-    hue: 270,
-  },
-];
-
 export type Post = { title: string; href: string };
 
 // PRUEBA

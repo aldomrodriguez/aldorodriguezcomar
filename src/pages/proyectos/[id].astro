@@ -1,0 +1,151 @@
+---
+import type { GetStaticPaths } from "astro";
+import { Image } from "astro:assets";
+import { render } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Icon from "../../components/Icon.astro";
+import Tactile from "../../components/Tactile.astro";
+import ProjectGallery from "../../components/ProjectGallery.astro";
+import { profile } from "../../data/profile";
+import { getProjects, type ProjectEntry } from "../../lib/projects";
+import IconArrowLeft from "@tabler/icons/outline/arrow-left.svg?raw";
+import IconExternal from "@tabler/icons/outline/external-link.svg?raw";
+import IconLock from "@tabler/icons/outline/lock.svg?raw";
+import IconBrandGithub from "@tabler/icons/outline/brand-github.svg?raw";
+
+export const getStaticPaths = (async () => {
+  const projects = await getProjects();
+  return projects.map((entry) => ({ params: { id: entry.id }, props: { entry } }));
+}) satisfies GetStaticPaths;
+
+type Props = { entry: ProjectEntry };
+
+const { entry } = Astro.props;
+const project = entry.data;
+const { Content } = await render(entry);
+
+const meta = [
+  { label: "Cliente", value: project.client },
+  { label: "Rol", value: project.role },
+  { label: "Año", value: project.year },
+  { label: "Estado", value: project.status },
+];
+
+// Estilos del Markdown del caso de estudio (sin plugin de tipografía).
+const prose = [
+  "text-[15px] leading-7 text-neutral-700 dark:text-neutral-300",
+  "[&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-neutral-900 dark:[&_h2]:text-white",
+  "[&_p]:my-4 [&_strong]:font-semibold [&_strong]:text-neutral-900 dark:[&_strong]:text-white",
+  "[&_ul]:my-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5 [&_li]:marker:text-neutral-400",
+  "[&_code]:rounded [&_code]:bg-black/5 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-[13px] dark:[&_code]:bg-white/10",
+  "[&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:border [&_pre]:border-black/10 [&_pre]:p-4 [&_pre]:text-xs [&_pre]:leading-relaxed dark:[&_pre]:border-white/10",
+  "[&_pre_code]:bg-transparent [&_pre_code]:p-0",
+  "[&_a]:underline [&_a]:underline-offset-4",
+];
+---
+
+<Layout title={`${project.title} · ${profile.name}`} description={project.description}>
+  <article>
+    <header class="px-4 pt-8 pb-8 sm:px-8 sm:pt-12">
+      <a href="/#proyectos" class="inline-flex items-center gap-1.5 text-sm text-neutral-500 transition hover:text-neutral-900 dark:hover:text-white">
+        <Icon svg={IconArrowLeft} /> Volver a proyectos
+      </a>
+
+      {
+        project.prueba && (
+          <p class="mt-6 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-sm text-amber-700 dark:text-amber-300">
+            Proyecto de ejemplo: todavía no tiene contenido real.
+          </p>
+        )
+      }
+
+      <h1 class="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">{project.title}</h1>
+      <p class="mt-3 text-base leading-relaxed text-neutral-600 sm:text-lg dark:text-neutral-400">{project.description}</p>
+
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        {
+          project.liveUrl && (
+            <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" class="inline-block rounded-2xl active:opacity-75">
+              <Tactile class="h-9 px-4 text-sm font-medium">
+                Ver sitio <Icon svg={IconExternal} class="size-3.5" />
+              </Tactile>
+            </a>
+          )
+        }
+        {
+          project.repo === "privado" && (
+            <span class="inline-flex items-center gap-1.5 text-sm text-neutral-500">
+              <Icon svg={IconLock} class="size-3.5" /> Código en repositorio privado
+            </span>
+          )
+        }
+        {
+          project.repo && project.repo !== "privado" && (
+            <a href={project.repo} target="_blank" rel="noopener noreferrer" class="inline-block rounded-2xl active:opacity-75">
+              <Tactile class="h-9 px-4 text-sm font-medium">
+                <Icon svg={IconBrandGithub} class="size-3.5" /> Código
+              </Tactile>
+            </a>
+          )
+        }
+      </div>
+
+      <dl class="mt-8 grid grid-cols-2 gap-4 border-y border-dashed border-black/10 py-5 sm:grid-cols-4 dark:border-white/10">
+        {
+          meta.map((item) => (
+            <div>
+              <dt class="text-xs text-neutral-500">{item.label}</dt>
+              <dd class="mt-0.5 text-sm font-medium">{item.value}</dd>
+            </div>
+          ))
+        }
+      </dl>
+
+      <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Tecnologías">
+        {project.tags.map((tag) => <li class="rounded-full bg-black/5 px-2.5 py-1 text-xs text-black/65 dark:bg-white/10 dark:text-white/70">{tag}</li>)}
+      </ul>
+    </header>
+
+    {
+      project.cover && (
+        <div class="px-4 sm:px-8">
+          <Image
+            src={project.cover}
+            alt={project.coverAlt ?? `Captura de ${project.title}`}
+            widths={[640, 960, 1440]}
+            sizes="(min-width: 768px) 704px, 92vw"
+            loading="eager"
+            fetchpriority="high"
+            class="h-auto w-full rounded-xl border border-black/10 shadow-sm dark:border-white/10"
+          />
+        </div>
+      )
+    }
+
+    {
+      project.stats.length > 0 && (
+        <ul class="mx-4 mt-8 grid grid-cols-2 gap-3 sm:mx-8 sm:grid-cols-4">
+          {project.stats.map((stat) => (
+            <li class="rounded-xl border border-black/10 p-4 dark:border-white/10">
+              <span class="block font-display text-2xl font-bold">{stat.value}</span>
+              <span class="mt-1 block text-xs leading-snug text-neutral-500">{stat.label}</span>
+            </li>
+          ))}
+        </ul>
+      )
+    }
+
+    <div class:list={["px-4 pb-4 sm:px-8", prose]}>
+      <Content />
+    </div>
+
+    {
+      project.gallery.length > 0 && (
+        <section aria-labelledby="capturas" class="px-4 pt-8 pb-16 sm:px-8">
+          <h2 id="capturas" class="mb-6 font-display text-xl font-bold">Capturas</h2>
+          <ProjectGallery images={project.gallery} />
+        </section>
+      )
+    }
+  </article>
+</Layout>
