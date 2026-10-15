@@ -1,0 +1,21 @@
+---
+// Bloque de sección: separador punteado y título tenue.
+type Props = { title: string; id: string; aside?: string };
+
+const { title, id, aside } = Astro.props;
+---
+
+<div class="border-b border-dashed border-black/[0.06] dark:border-white/[0.06]"></div>
+<section aria-labelledby={id} class="px-4 pt-4 pb-6 sm:px-8 sm:pt-6" data-reveal>
+  <h2 id={id} class="mt-4 mb-4 font-display text-base leading-relaxed -tracking-[0.01em] opacity-20 sm:mt-6 sm:text-xl">
+    {title}
+    {
+      aside && (
+        <>
+          <span class="mx-1 inline-block size-1.5 rounded-full bg-current align-middle opacity-40" aria-hidden="true" /> {aside}
+        </>
+      )
+    }
+  </h2>
+  <slot />
+</section>

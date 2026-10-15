@@ -1,0 +1,28 @@
+---
+import { profile } from "../data/profile";
+import Icon from "./Icon.astro";
+import Tactile from "./Tactile.astro";
+import IconPlus from "@tabler/icons/outline/plus.svg?raw";
+
+const initials = profile.name
+  .split(" ")
+  .map((part) => part[0])
+  .join("");
+---
+
+<!-- Al hover se despliega "+ Vos" junto al avatar. -->
+<div class="mt-10 text-center">
+  <p class="mb-4 font-display text-base text-neutral-600 italic sm:text-lg dark:text-neutral-400">{profile.cta.text}</p>
+  <a href={profile.cta.href} class="group inline-block rounded-2xl active:opacity-75">
+    <Tactile class="gap-2.5 px-5 py-2.5 text-sm sm:gap-3 sm:py-2 sm:text-base">
+      <span class="grid size-6 shrink-0 place-items-center rounded-full bg-neutral-800 text-[10px] font-bold text-white sm:size-7 dark:bg-neutral-200 dark:text-neutral-900" aria-hidden="true">
+        {initials}
+      </span>
+      <span class="flex w-0 items-center gap-1 overflow-hidden transition-all duration-300 ease-out group-hover:w-[50px] group-focus-visible:w-[50px]" aria-hidden="true">
+        <Icon svg={IconPlus} class="size-2 shrink-0 sm:size-3" />
+        <span class="grid size-5 shrink-0 place-items-center rounded-full bg-zinc-900/10 text-[8px] sm:size-6 sm:text-[10px] dark:bg-white/10">Vos</span>
+      </span>
+      <span class="whitespace-nowrap">{profile.cta.label}</span>
+    </Tactile>
+  </a>
+</div>

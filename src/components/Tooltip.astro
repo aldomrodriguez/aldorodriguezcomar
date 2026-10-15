@@ -1,0 +1,16 @@
+---
+// Tooltip solo CSS: aparece con hover o foco de teclado. El nombre accesible lo da el elemento envuelto.
+type Props = { label: string };
+
+const { label } = Astro.props;
+---
+
+<span class="group/tip relative inline-flex">
+  <slot />
+  <span
+    aria-hidden="true"
+    class="pointer-events-none absolute bottom-full left-1/2 z-30 mb-2 -translate-x-1/2 translate-y-1 rounded-md bg-neutral-900 px-2 py-1 text-xs whitespace-nowrap text-white opacity-0 transition duration-150 group-focus-within/tip:translate-y-0 group-focus-within/tip:opacity-100 group-hover/tip:translate-y-0 group-hover/tip:opacity-100 dark:bg-white dark:text-neutral-900"
+  >
+    {label}
+  </span>
+</span>

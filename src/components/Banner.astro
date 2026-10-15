@@ -1,0 +1,29 @@
+---
+import { profile } from "../data/profile";
+---
+
+<!-- Montañas en SVG (sin imagen que descargar): de día en tema claro, de noche en oscuro. -->
+<div
+  class="relative h-[180px] w-full overflow-hidden bg-gradient-to-b from-sky-400 via-sky-200 to-orange-100 sm:h-[270px] dark:from-slate-950 dark:via-slate-900 dark:to-slate-800"
+>
+  <svg class="absolute inset-0 size-full opacity-0 dark:opacity-100" aria-hidden="true">
+    <circle cx="12%" cy="18%" r="1" fill="white" opacity=".7"></circle>
+    <circle cx="27%" cy="10%" r="1.2" fill="white" opacity=".5"></circle>
+    <circle cx="44%" cy="22%" r=".8" fill="white" opacity=".8"></circle>
+    <circle cx="63%" cy="8%" r="1" fill="white" opacity=".6"></circle>
+    <circle cx="78%" cy="20%" r="1.3" fill="white" opacity=".7"></circle>
+    <circle cx="90%" cy="12%" r=".9" fill="white" opacity=".5"></circle>
+    <circle cx="84%" cy="16%" r="14" fill="#f8fafc" opacity=".9"></circle>
+  </svg>
+  <svg class="absolute inset-x-0 bottom-0 h-4/5 w-full" viewBox="0 0 800 200" preserveAspectRatio="none" aria-hidden="true">
+    <path d="M0 200 L0 110 L90 50 L160 100 L250 20 L340 95 L420 40 L520 115 L600 30 L700 95 L800 60 L800 200 Z" class="fill-slate-400 dark:fill-slate-700" opacity=".7"></path>
+    <path d="M0 200 L0 145 L120 90 L210 135 L320 70 L430 135 L560 80 L680 145 L800 100 L800 200 Z" class="fill-slate-500 dark:fill-slate-800"></path>
+    <path d="M0 200 L0 170 L150 140 L300 172 L450 138 L600 165 L800 142 L800 200 Z" class="fill-slate-700 dark:fill-slate-950"></path>
+  </svg>
+  <div class="absolute inset-0 bg-black/25 dark:bg-black/30"></div>
+  <p
+    class="absolute inset-0 flex items-center justify-center px-4 text-center font-display text-base text-white italic drop-shadow-[0_2px_10px_rgba(0,0,0,0.45)] sm:text-xl"
+  >
+    {profile.tagline}
+  </p>
+</div>

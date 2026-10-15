@@ -1,0 +1,55 @@
+---
+import { fetchContributions, monthLabels, toWeeks } from "../lib/contributions";
+
+type Props = { user: string };
+
+const { user } = Astro.props;
+const data = await fetchContributions(user);
+const weeks = data ? toWeeks(data.days) : [];
+const labels = monthLabels(weeks);
+
+const levels = [
+  "bg-black/[0.06] dark:bg-white/[0.06]",
+  "bg-emerald-200 dark:bg-emerald-900",
+  "bg-emerald-400 dark:bg-emerald-700",
+  "bg-emerald-500 dark:bg-emerald-500",
+  "bg-emerald-700 dark:bg-emerald-300",
+];
+---
+
+{
+  data ? (
+    <figure class="rounded-xl p-2 transition duration-300 hover:scale-[1.005] hover:shadow-sm">
+      <div class="overflow-x-auto pb-2">
+        <div class="inline-grid gap-1" style={`grid-template-columns: repeat(${weeks.length}, 0.625rem)`}>
+          {labels.map((label) => (
+            <span class="h-4 overflow-visible text-[10px] whitespace-nowrap text-neutral-500" aria-hidden="true">
+              {label}
+            </span>
+          ))}
+          {weeks.map((week) => (
+            <div class="grid grid-rows-7 gap-1">
+              {week.map((day) =>
+                day ? (
+                  <span class:list={["size-2.5 rounded-[2px]", levels[day.level]]} title={`${day.count} contribuciones el ${day.date}`} />
+                ) : (
+                  <span class="size-2.5" />
+                ),
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+      <figcaption class="mt-2 flex items-center justify-between text-xs text-neutral-500">
+        <span>{data.total} contribuciones en el último año</span>
+        <span class="flex items-center gap-1" aria-hidden="true">
+          Menos {levels.map((level) => <span class:list={["size-2.5 rounded-[2px]", level]} />)} Más
+        </span>
+      </figcaption>
+    </figure>
+  ) : (
+    <p class="text-sm text-neutral-500">
+      No se pudieron cargar las contribuciones. <a class="underline" href={`https://github.com/${user}`}>Ver perfil en GitHub</a>.
+    </p>
+  )
+}

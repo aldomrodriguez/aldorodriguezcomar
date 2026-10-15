@@ -1,0 +1,41 @@
+---
+import { profile } from "../data/profile";
+import Icon from "./Icon.astro";
+import Tactile from "./Tactile.astro";
+import IconGithub from "@tabler/icons/outline/brand-github.svg?raw";
+import IconLinkedin from "@tabler/icons/outline/brand-linkedin.svg?raw";
+import IconMail from "@tabler/icons/outline/mail.svg?raw";
+import IconWorld from "@tabler/icons/outline/world.svg?raw";
+
+const links = [
+  { label: "GitHub", href: profile.socials.github, icon: IconGithub },
+  { label: "LinkedIn", href: profile.socials.linkedin, icon: IconLinkedin },
+  { label: "Email", href: `mailto:${profile.socials.email}`, icon: IconMail },
+  { label: "Sitio web", href: profile.siteUrl, icon: IconWorld },
+];
+---
+
+<div class="border-b border-dashed border-black/[0.06] dark:border-white/[0.06]"></div>
+<section aria-labelledby="contacto" class="px-4 pt-10 pb-24 sm:px-8 sm:pb-28" data-reveal>
+  <div class="text-center sm:text-left">
+    <h2 id="contacto" class="mb-2 font-display text-lg opacity-20 sm:text-xl">Conectemos</h2>
+    <p class="mb-3 opacity-20 sm:mb-4 sm:text-lg">Encontrame en código, trabajo y novedades</p>
+  </div>
+  <ul class="flex flex-wrap justify-center gap-3 sm:justify-start sm:gap-4">
+    {
+      links.map((link) => (
+        <li>
+          <a href={link.href} target="_blank" rel="noopener noreferrer" aria-label={link.label} class="inline-block rounded-2xl active:opacity-75">
+            <Tactile class="px-3 py-2">
+              <Icon svg={link.icon} class="size-5 shrink-0 sm:size-[18px]" />
+              <span class="hidden text-sm font-medium sm:inline">{link.label}</span>
+            </Tactile>
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+  <p class="mt-12 border-t border-black/[0.06] pt-6 text-center text-xs text-neutral-500 sm:text-left dark:border-white/[0.06]">
+    © {new Date().getFullYear()} {profile.name}.
+  </p>
+</section>

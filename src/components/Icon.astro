@@ -1,0 +1,12 @@
+---
+// Renderiza un SVG de tabler-icons importado con ?raw (importación explícita por icono).
+type Props = { svg: string; class?: string; label?: string };
+
+const { svg, class: className = "size-4", label } = Astro.props;
+
+const markup = svg
+  .replace(/\s(width|height|class)="[^"]*"/g, "")
+  .replace("<svg", `<svg class="${className}" ${label ? `role="img" aria-label="${label}"` : 'aria-hidden="true"'}`);
+---
+
+<Fragment set:html={markup} />

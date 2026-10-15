@@ -1,0 +1,15 @@
+---
+// Botón con relieve: borde inferior marcado que se "hunde" 1px al pasar el mouse.
+// Es solo la carcasa visual; el <a> o <button> que lo contiene define la acción.
+type Props = { class?: string };
+
+const { class: className } = Astro.props;
+---
+
+<span
+  class="relative flex w-max items-center justify-center overflow-hidden rounded-2xl border border-neutral-200 bg-neutral-50 [box-shadow:0_4px_10px_-4px_rgba(15,23,42,0.15)] transition-all duration-150 ease-out after:absolute after:inset-0 after:rounded-2xl after:border-t-2 after:border-b-2 after:border-neutral-100 after:border-b-neutral-300 after:content-[''] hover:after:border-b-0 hover:after:border-t-neutral-300 hover:after:[box-shadow:0_3px_10px_0_rgba(15,23,42,0.12)_inset] hover:[&>span]:translate-y-px dark:border-black/50 dark:bg-[#212121] dark:after:border-[#2A2A2A] dark:after:border-b-black/50 dark:hover:after:border-t-black/50 dark:hover:after:[box-shadow:0_5px_15px_0_#00000070_inset]"
+>
+  <span class:list={["flex items-center justify-center gap-1.5 text-neutral-800 transition-transform dark:text-white/80", className]}>
+    <slot />
+  </span>
+</span>

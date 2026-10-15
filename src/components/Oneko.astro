@@ -1,0 +1,41 @@
+<!-- Gatito que sigue al cursor. Solo con mouse y si el usuario no pidió menos movimiento. -->
+<div
+  data-oneko
+  aria-hidden="true"
+  class="pointer-events-none fixed top-0 left-0 z-[2147483647] hidden size-8 bg-[url(/oneko.gif)] [image-rendering:pixelated]"
+  style="transform: translate(16px, 16px); background-position: -96px -96px"
+>
+</div>
+
+<script>
+  import { initialState, spritePosition, step } from "../lib/oneko";
+
+  const element = document.querySelector<HTMLElement>("[data-oneko]");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const finePointer = window.matchMedia("(pointer: fine)").matches;
+
+  if (element && !reducedMotion && finePointer) {
+    let state = initialState();
+    const mouse = { x: 0, y: 0 };
+    let last = 0;
+
+    element.classList.remove("hidden");
+    document.addEventListener("mousemove", (event) => {
+      mouse.x = event.clientX;
+      mouse.y = event.clientY;
+    });
+
+    const tick = (time: number) => {
+      if (time - last > 100) {
+        last = time;
+        const result = step(state, mouse, { width: window.innerWidth, height: window.innerHeight });
+        state = result.state;
+        element.style.transform = `translate(${state.x - 16}px, ${state.y - 16}px)`;
+        element.style.backgroundPosition = spritePosition(result.sprite, result.frame);
+      }
+      requestAnimationFrame(tick);
+    };
+
+    requestAnimationFrame(tick);
+  }
+</script>
