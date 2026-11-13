@@ -34,8 +34,6 @@ const proyectos = defineCollection({
           }),
         )
         .default([]),
-      // Datos de ejemplo pendientes de reemplazar.
-      prueba: z.boolean().default(false),
     }),
 });
 

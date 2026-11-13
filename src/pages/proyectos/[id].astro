@@ -36,7 +36,7 @@ const prose = [
   "text-[15px] leading-7 text-neutral-700 dark:text-neutral-300",
   "[&_h2]:mt-12 [&_h2]:mb-4 [&_h2]:font-display [&_h2]:text-xl [&_h2]:font-bold [&_h2]:text-neutral-900 dark:[&_h2]:text-white",
   "[&_p]:my-4 [&_strong]:font-semibold [&_strong]:text-neutral-900 dark:[&_strong]:text-white",
-  "[&_ul]:my-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5 [&_li]:marker:text-neutral-400",
+  "[&_ul]:my-4 [&_ul]:list-disc [&_ul]:space-y-2 [&_ul]:pl-5 [&_li]:marker:text-fg-subtle",
   "[&_code]:rounded [&_code]:bg-black/5 [&_code]:px-1.5 [&_code]:py-0.5 [&_code]:text-[13px] dark:[&_code]:bg-white/10",
   "[&_pre]:my-6 [&_pre]:overflow-x-auto [&_pre]:rounded-xl [&_pre]:border [&_pre]:border-black/10 [&_pre]:p-4 [&_pre]:text-xs [&_pre]:leading-relaxed dark:[&_pre]:border-white/10",
   "[&_pre_code]:bg-transparent [&_pre_code]:p-0",
@@ -47,20 +47,12 @@ const prose = [
 <Layout title={`${project.title} · ${profile.name}`} description={project.description}>
   <article>
     <header class="px-4 pt-8 pb-8 sm:px-8 sm:pt-12">
-      <a href="/#proyectos" class="inline-flex items-center gap-1.5 text-sm text-neutral-500 transition hover:text-neutral-900 dark:hover:text-white">
+      <a href="/#proyectos" class="inline-flex items-center gap-1.5 text-sm text-fg-subtle transition hover:text-neutral-900 dark:hover:text-white">
         <Icon svg={IconArrowLeft} /> Volver a proyectos
       </a>
 
-      {
-        project.prueba && (
-          <p class="mt-6 rounded-lg border border-amber-500/30 bg-amber-500/10 px-3 py-2 text-sm text-amber-700 dark:text-amber-300">
-            Proyecto de ejemplo: todavía no tiene contenido real.
-          </p>
-        )
-      }
-
       <h1 class="mt-6 font-display text-3xl font-bold tracking-tight sm:text-4xl">{project.title}</h1>
-      <p class="mt-3 text-base leading-relaxed text-neutral-600 sm:text-lg dark:text-neutral-400">{project.description}</p>
+      <p class="mt-3 text-base leading-relaxed text-fg-muted sm:text-lg">{project.description}</p>
 
       <div class="mt-6 flex flex-wrap items-center gap-3">
         {
@@ -74,7 +66,7 @@ const prose = [
         }
         {
           project.repo === "privado" && (
-            <span class="inline-flex items-center gap-1.5 text-sm text-neutral-500">
+            <span class="inline-flex items-center gap-1.5 text-sm text-fg-subtle">
               <Icon svg={IconLock} class="size-3.5" /> Código en repositorio privado
             </span>
           )
@@ -94,7 +86,7 @@ const prose = [
         {
           meta.map((item) => (
             <div>
-              <dt class="text-xs text-neutral-500">{item.label}</dt>
+              <dt class="text-xs text-fg-subtle">{item.label}</dt>
               <dd class="mt-0.5 text-sm font-medium">{item.value}</dd>
             </div>
           ))
@@ -102,7 +94,7 @@ const prose = [
       </dl>
 
       <ul class="mt-5 flex flex-wrap gap-1.5" aria-label="Tecnologías">
-        {project.tags.map((tag) => <li class="rounded-full bg-black/5 px-2.5 py-1 text-xs text-black/65 dark:bg-white/10 dark:text-white/70">{tag}</li>)}
+        {project.tags.map((tag) => <li class="rounded-full bg-black/5 px-2.5 py-1 text-xs text-fg-muted dark:bg-white/10">{tag}</li>)}
       </ul>
     </header>
 
@@ -124,11 +116,11 @@ const prose = [
 
     {
       project.stats.length > 0 && (
-        <ul class="mx-4 mt-8 grid grid-cols-2 gap-3 sm:mx-8 sm:grid-cols-4">
+        <ul class="mx-4 mt-8 grid grid-cols-1 gap-3 min-[380px]:grid-cols-2 sm:mx-8 sm:auto-cols-fr sm:grid-flow-col sm:grid-cols-none">
           {project.stats.map((stat) => (
             <li class="rounded-xl border border-black/10 p-4 dark:border-white/10">
               <span class="block font-display text-2xl font-bold">{stat.value}</span>
-              <span class="mt-1 block text-xs leading-snug text-neutral-500">{stat.label}</span>
+              <span class="mt-1 block text-xs leading-snug text-fg-subtle">{stat.label}</span>
             </li>
           ))}
         </ul>

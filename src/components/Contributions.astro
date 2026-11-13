@@ -8,47 +8,61 @@ const data = await fetchContributions(user);
 const weeks = data ? toWeeks(data.days) : [];
 const labels = monthLabels(weeks);
 
+// En celular solo entran los últimos meses sin que los cuadrados queden diminutos.
+const MOBILE_WEEKS = 26;
+const firstMobileWeek = Math.max(0, weeks.length - MOBILE_WEEKS);
+const onlyDesktop = (index: number, display: "sm:block" | "sm:grid") => (index < firstMobileWeek ? `hidden ${display}` : "");
+
 const levels = [
-  "bg-black/[0.06] dark:bg-white/[0.06]",
-  "bg-emerald-200 dark:bg-emerald-900",
-  "bg-emerald-400 dark:bg-emerald-700",
-  "bg-emerald-500 dark:bg-emerald-500",
-  "bg-emerald-700 dark:bg-emerald-300",
+  "bg-neutral-200 dark:bg-neutral-800",
+  "bg-emerald-300 dark:bg-emerald-800",
+  "bg-emerald-500 dark:bg-emerald-600",
+  "bg-emerald-600 dark:bg-emerald-400",
+  "bg-emerald-800 dark:bg-emerald-300",
 ];
 ---
 
 {
   data ? (
-    <figure class="rounded-xl p-2 transition duration-300 hover:scale-[1.005] hover:shadow-sm">
-      <div class="overflow-x-auto pb-2">
-        <div class="inline-grid gap-1" style={`grid-template-columns: repeat(${weeks.length}, 0.625rem)`}>
-          {labels.map((label) => (
-            <span class="h-4 overflow-visible text-[10px] whitespace-nowrap text-neutral-500" aria-hidden="true">
+    <a
+      href={`https://github.com/${user}`}
+      target="_blank"
+      rel="noopener noreferrer"
+      aria-label={`Ver el perfil de @${user} en GitHub: ${data.total} contribuciones en el último año`}
+      class="block rounded-lg transition-opacity hover:opacity-80 focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-500"
+    >
+      <figure>
+        <div
+          class="grid [grid-template-columns:repeat(var(--cols-mobile),minmax(0,1fr))] gap-[3px] sm:[grid-template-columns:repeat(var(--cols),minmax(0,1fr))]"
+          style={`--cols: ${weeks.length}; --cols-mobile: ${weeks.length - firstMobileWeek}`}
+        >
+          {labels.map((label, index) => (
+            <span class:list={["h-4 text-[11px] whitespace-nowrap text-fg-subtle", onlyDesktop(index, "sm:block")]} aria-hidden="true">
               {label}
             </span>
           ))}
-          {weeks.map((week) => (
-            <div class="grid grid-rows-7 gap-1">
+          {weeks.map((week, index) => (
+            <div class:list={["grid grid-rows-7 gap-[3px]", onlyDesktop(index, "sm:grid")]}>
               {week.map((day) =>
                 day ? (
-                  <span class:list={["size-2.5 rounded-[2px]", levels[day.level]]} title={`${day.count} contribuciones el ${day.date}`} />
+                  <span class:list={["aspect-square rounded-[3px]", levels[day.level]]} title={`${day.count} contribuciones el ${day.date}`} />
                 ) : (
-                  <span class="size-2.5" />
+                  <span class="aspect-square" />
                 ),
               )}
             </div>
           ))}
         </div>
-      </div>
-      <figcaption class="mt-2 flex items-center justify-between text-xs text-neutral-500">
-        <span>{data.total} contribuciones en el último año</span>
-        <span class="flex items-center gap-1" aria-hidden="true">
-          Menos {levels.map((level) => <span class:list={["size-2.5 rounded-[2px]", level]} />)} Más
-        </span>
-      </figcaption>
-    </figure>
+        <figcaption class="mt-3 flex flex-wrap items-center justify-between gap-2 text-xs text-fg-subtle">
+          <span>{data.total} contribuciones en el último año</span>
+          <span class="flex items-center gap-1" aria-hidden="true">
+            Menos {levels.map((level) => <span class:list={["size-3 rounded-[3px]", level]} />)} Más
+          </span>
+        </figcaption>
+      </figure>
+    </a>
   ) : (
-    <p class="text-sm text-neutral-500">
+    <p class="text-sm text-fg-subtle">
       No se pudieron cargar las contribuciones. <a class="underline" href={`https://github.com/${user}`}>Ver perfil en GitHub</a>.
     </p>
   )

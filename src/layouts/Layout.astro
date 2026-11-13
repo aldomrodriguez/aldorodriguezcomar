@@ -32,7 +32,7 @@ const { title, description } = Astro.props;
     </script>
   </head>
   <body
-    class="min-h-dvh bg-white font-sans text-neutral-900 antialiased transition-colors duration-300 dark:bg-neutral-950 dark:text-neutral-100"
+    class="min-h-dvh bg-neutral-100 font-sans text-neutral-900 antialiased transition-colors duration-300 dark:bg-neutral-950 dark:text-neutral-100"
   >
     <a
       href="#contenido"
@@ -41,7 +41,7 @@ const { title, description } = Astro.props;
     >
     <div class="relative mx-auto max-w-4xl">
       <SideRails />
-      <main id="contenido" tabindex="-1" class="relative outline-none mx-auto max-w-3xl border-x border-black/[0.06] dark:border-white/[0.06]">
+      <main id="contenido" tabindex="-1" class="relative outline-none mx-auto max-w-3xl border-x border-black/15 bg-white dark:border-white/10 dark:bg-neutral-950">
         <slot />
       </main>
     </div>

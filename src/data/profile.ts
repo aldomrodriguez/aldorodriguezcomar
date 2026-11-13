@@ -1,33 +1,29 @@
-// Contenido del portfolio. Todo lo marcado con "PRUEBA" es dato de ejemplo para reemplazar.
+// Contenido del portfolio.
 
 export const profile = {
   name: "Aldo Rodriguez",
   role: "Desarrollador de software",
-  location: "Lobos, Buenos Aires", // PRUEBA
-  tagline: "Construir soluciones simples para problemas reales.", // PRUEBA
-  badge: "Disponible para proyectos", // PRUEBA
+  location: "Buenos Aires, Argentina",
   intro: {
-    highlight: "Creo herramientas digitales que hacen crecer negocios.",
-    body: "Desarrollo desde una landing page hasta sistemas de gestión empresarial: e-commerce, menús digitales, webs institucionales y posicionamiento SEO. Me adapto a lo que cada cliente necesita y entrego productos rápidos, cuidados y fáciles de mantener.",
+    highlight: "Desarrollador Full Stack.",
+    body: "Trabajo para la Subsecretaría de Modernización del Municipio de Lobos, donde desarrollo micrositios, aplicaciones para la comunidad y soluciones para el día a día.",
   },
   siteUrl: "https://aldorodriguez.com.ar",
   githubUser: "aldomrodriguez",
   socials: {
     github: "https://github.com/aldomrodriguez",
-    linkedin: "https://www.linkedin.com/in/aldorodriguez", // PRUEBA
-    email: "hola@aldorodriguez.com.ar", // PRUEBA
+    linkedin: "https://www.linkedin.com/in/aldomrodriguez91/",
+    email: "rodriguez.aldo.91@hotmail.com",
   },
   cta: {
     text: "Si llegaste hasta acá, quizás te interese lo que hago.",
-    label: "Agendá una llamada",
-    href: "mailto:hola@aldorodriguez.com.ar", // PRUEBA
   },
 };
 
 export type Experience = {
   company: string;
   role: string;
-  period: string;
+  period?: string;
   url?: string;
   summary: string;
   details: string[];
@@ -35,58 +31,40 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
-    company: "AldoRodriguez",
-    role: "Fundador y desarrollador",
-    period: "2020 - Presente", // PRUEBA
-    url: "https://aldorodriguez.com.ar",
-    summary: "Desarrollo de software a medida para pymes y comercios.",
+    company: "Municipio de Lobos",
+    role: "Desarrollador · Subsecretaría de Modernización",
+    period: "2024 - Presente",
+    summary: "Modernización del Municipio, puertas adentro y para los vecinos.",
     details: [
-      "Diseño y desarrollo de webs institucionales, landing pages y e-commerce.",
-      "Menús digitales y catálogos para gastronomía y comercios.",
-      "Estrategias de posicionamiento SEO.",
+      "Día a día, sumo herramientas que ordenan y simplifican el trabajo interno de las distintas áreas.",
+      "Hacia afuera, la idea es facilitarles la vida a los vecinos con trámites más simples y servicios en línea.",
+      "Además, proyectos puntuales como micrositios para eventos.",
     ],
   },
   {
-    company: "Empresa de ejemplo", // PRUEBA
-    role: "Desarrollador full stack",
-    period: "2018 - 2020",
-    summary: "Desarrollo de sistemas internos y portales web.",
+    company: "Independiente",
+    role: "Desarrollador freelance",
+    summary: "Proyectos propios y trabajos a medida.",
     details: [
-      "Mantenimiento de aplicaciones web en producción.",
-      "Integraciones con APIs de terceros.",
+      "Productos propios, como KIVO y Pedilo por acá.",
+      "Sitios y sistemas web a medida para clientes.",
     ],
   },
-  {
-    company: "Otra empresa", // PRUEBA
-    role: "Desarrollador frontend",
-    period: "2016 - 2018",
-    summary: "Maquetación e interfaces para clientes de distintos rubros.",
-    details: ["Sitios responsive y accesibles.", "Trabajo con diseñadores en sistemas de componentes."],
-  },
-];
-
-export type Post = { title: string; href: string };
-
-// PRUEBA
-export const posts: Post[] = [
-  { title: "Por qué tu negocio necesita una web rápida en 2026", href: "#" },
-  { title: "Landing page vs. web institucional: cuál elegir", href: "#" },
-  { title: "SEO local: cómo aparecer cuando te buscan en tu ciudad", href: "#" },
 ];
 
 export type Service = {
   title: string;
   description: string;
-  icon: "layout" | "article" | "shopping-cart" | "tools-kitchen" | "building" | "search";
+  icon: "layout" | "building" | "code" | "shopping-cart" | "message-chatbot" | "search";
   href: string;
 };
 
 export const services: Service[] = [
-  { title: "Landing Page", description: "Captá la atención de tus clientes desde el primer segundo.", icon: "layout", href: "#contacto" },
-  { title: "Blog", description: "Mantené a tu audiencia actualizada con contenido propio.", icon: "article", href: "#contacto" },
-  { title: "E-commerce", description: "Una tienda intuitiva y segura para vender online.", icon: "shopping-cart", href: "#contacto" },
-  { title: "Menú Digital", description: "Una experiencia interactiva para tus clientes.", icon: "tools-kitchen", href: "#contacto" },
+  { title: "Landing Page", description: "Una página clara y rápida para presentar lo que hacés.", icon: "layout", href: "#contacto" },
   { title: "Web Institucional", description: "Presencia profesional que representa tu marca.", icon: "building", href: "#contacto" },
+  { title: "Sistemas a medida", description: "Paneles y herramientas internas para ordenar el trabajo diario.", icon: "code", href: "#contacto" },
+  { title: "Tienda y pedidos online", description: "Un catálogo donde tus clientes eligen y hacen su pedido.", icon: "shopping-cart", href: "#contacto" },
+  { title: "Bots de atención", description: "Respuestas automáticas con IA en WhatsApp y en tu web.", icon: "message-chatbot", href: "#contacto" },
   { title: "Posicionamiento SEO", description: "Más visibilidad para llegar a tu público.", icon: "search", href: "#contacto" },
 ];
 
@@ -104,12 +82,11 @@ export type TechIcon =
   | "php"
   | "mysql"
   | "database"
+  | "mongodb"
   | "git"
   | "docker"
-  | "wordpress"
-  | "figma";
+  | "wordpress";
 
-// PRUEBA: ajustar a tu stack real.
 export const stack: { name: string; icon: TechIcon }[] = [
   { name: "HTML", icon: "html5" },
   { name: "CSS", icon: "css3" },
@@ -123,32 +100,8 @@ export const stack: { name: string; icon: TechIcon }[] = [
   { name: "PHP", icon: "php" },
   { name: "MySQL", icon: "mysql" },
   { name: "PostgreSQL", icon: "database" },
+  { name: "MongoDB", icon: "mongodb" },
   { name: "WordPress", icon: "wordpress" },
-  { name: "Figma", icon: "figma" },
   { name: "Git", icon: "git" },
   { name: "Docker", icon: "docker" },
-];
-
-export type Highlight = { title: string; year: string; description: string; href: string };
-
-// PRUEBA
-export const highlights: Highlight[] = [
-  {
-    title: "Menú Digital: de la carta en papel al QR",
-    year: "2025",
-    description: "Más de 30 comercios gestionan sus cartas desde un panel propio.",
-    href: "#",
-  },
-  {
-    title: "Tienda Online: ventas 24/7 para un comercio local",
-    year: "2025",
-    description: "Catálogo, carrito y pagos con tiempos de carga por debajo del segundo.",
-    href: "#",
-  },
-  {
-    title: "Sistema de Gestión: stock y ventas en un solo lugar",
-    year: "2024",
-    description: "Reemplazo de planillas por un sistema con reportes en tiempo real.",
-    href: "#",
-  },
 ];

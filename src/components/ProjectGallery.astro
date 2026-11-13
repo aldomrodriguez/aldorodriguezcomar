@@ -8,7 +8,7 @@ const { images } = Astro.props;
 const desktop = images.filter((image) => image.device === "desktop");
 const mobile = images.filter((image) => image.device === "mobile");
 const frame = "h-auto w-full rounded-xl border border-black/10 shadow-sm dark:border-white/10";
-const caption = "mt-2 text-xs leading-relaxed text-neutral-500";
+const caption = "mt-2 text-xs leading-relaxed text-fg-subtle";
 ---
 
 <!-- Escritorio a todo el ancho; celular en columnas. Cada imagen abre su versión completa. -->

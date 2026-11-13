@@ -4,22 +4,17 @@ import Hero from "../components/Hero.astro";
 import Section from "../components/Section.astro";
 import ExperienceList from "../components/ExperienceList.astro";
 import ProjectCard from "../components/ProjectCard.astro";
-import PostList from "../components/PostList.astro";
 import ServiceGrid from "../components/ServiceGrid.astro";
 import Contributions from "../components/Contributions.astro";
 import StackMarquee from "../components/StackMarquee.astro";
-import HighlightList from "../components/HighlightList.astro";
 import CallToAction from "../components/CallToAction.astro";
-import Connect from "../components/Connect.astro";
 import { profile } from "../data/profile";
 import { getProjects } from "../lib/projects";
 
 const projects = await getProjects();
-
-const today = new Intl.DateTimeFormat("es-AR", { day: "numeric", month: "long", year: "numeric" }).format(new Date());
 ---
 
-<Layout title={`${profile.name} · ${profile.role}`} description={profile.intro.highlight}>
+<Layout title={`${profile.name} · ${profile.role}`} description={`${profile.intro.highlight} ${profile.intro.body}`}>
   <Hero />
 
   <Section title="Experiencia" id="experiencia">
@@ -33,27 +28,19 @@ const today = new Intl.DateTimeFormat("es-AR", { day: "numeric", month: "long", 
     </div>
   </Section>
 
-  <Section title="Artículos" id="articulos">
-    <PostList />
-  </Section>
-
   <Section title="Servicios" id="servicios">
     <ServiceGrid />
+    <CallToAction />
   </Section>
 
-  <Section title="Contribuciones en GitHub" id="github" aside={`@${profile.githubUser}`}>
+  <Section title="Contribuciones en GitHub" id="github" aside={`@${profile.githubUser}`} asideHref={`https://github.com/${profile.githubUser}`}>
     <Contributions user={profile.githubUser} />
   </Section>
 
   <Section title="Stack" id="stack">
-    <p class="mb-4 text-sm leading-relaxed text-black/70 sm:text-base dark:text-white/70">Tecnologías con las que construyo productos que resuelven problemas reales.</p>
+    <p class="mb-4 text-sm leading-relaxed text-fg-muted sm:text-base">Tecnologías con las que construyo productos que resuelven problemas reales.</p>
     <StackMarquee />
   </Section>
-
-  <Section title="Trabajo destacado" id="destacado" aside={today}>
-    <HighlightList />
-    <CallToAction />
-  </Section>
-
-  <Connect />
+  <!-- Aire al final de la página, debajo del último carrusel. -->
+  <div class="h-16 sm:h-20" aria-hidden="true"></div>
 </Layout>

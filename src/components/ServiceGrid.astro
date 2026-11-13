@@ -2,19 +2,19 @@
 import { services, type Service } from "../data/profile";
 import Icon from "./Icon.astro";
 import IconLayout from "@tabler/icons/outline/layout.svg?raw";
-import IconArticle from "@tabler/icons/outline/article.svg?raw";
 import IconCart from "@tabler/icons/outline/shopping-cart.svg?raw";
-import IconKitchen from "@tabler/icons/outline/tools-kitchen.svg?raw";
+import IconCode from "@tabler/icons/outline/code.svg?raw";
+import IconChatbot from "@tabler/icons/outline/message-chatbot.svg?raw";
 import IconBuilding from "@tabler/icons/outline/building.svg?raw";
 import IconSearch from "@tabler/icons/outline/search.svg?raw";
 import IconExternal from "@tabler/icons/outline/external-link.svg?raw";
 
 const icons: Record<Service["icon"], string> = {
   layout: IconLayout,
-  article: IconArticle,
-  "shopping-cart": IconCart,
-  "tools-kitchen": IconKitchen,
   building: IconBuilding,
+  code: IconCode,
+  "shopping-cart": IconCart,
+  "message-chatbot": IconChatbot,
   search: IconSearch,
 };
 ---
@@ -33,9 +33,9 @@ const icons: Record<Service["icon"], string> = {
           </span>
           <span class="min-w-0 flex-1">
             <h3 class="text-[1.05rem] leading-tight font-semibold text-zinc-900 dark:text-zinc-50">{service.title}</h3>
-            <p class="mt-1 text-sm text-neutral-600 dark:text-neutral-400">{service.description}</p>
+            <p class="mt-1 text-sm text-fg-muted">{service.description}</p>
           </span>
-          <Icon svg={IconExternal} class="size-4 shrink-0 text-neutral-400 transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
+          <Icon svg={IconExternal} class="size-4 shrink-0 text-fg-subtle transition-transform duration-300 group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
         </a>
       </li>
     ))
