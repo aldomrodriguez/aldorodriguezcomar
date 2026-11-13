@@ -12,7 +12,8 @@ import IconArrow from "@tabler/icons/outline/arrow-up-right.svg?raw";
     experience.map((job) => (
       <li>
         <details class="group/item rounded-xl border border-transparent px-3 py-3 transition-[background-color,border-color,opacity] duration-250 ease-out group-has-hover:opacity-70 group-has-hover:hover:border-black/[0.08] group-has-hover:hover:bg-black/[0.025] group-has-hover:hover:opacity-100 sm:px-4 sm:py-4 dark:group-has-hover:hover:border-white/[0.08] dark:group-has-hover:hover:bg-white/[0.035]">
-          <summary class="flex cursor-pointer list-none flex-col gap-3 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-500 sm:flex-row sm:items-center sm:justify-between [&::-webkit-details-marker]:hidden">
+          <!-- El botón queda siempre a la derecha; en celular el período baja como una línea más del texto. -->
+          <summary class="flex cursor-pointer list-none items-center gap-3 rounded-lg focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-neutral-500 sm:gap-4 [&::-webkit-details-marker]:hidden">
             <span class="flex min-w-0 flex-1 items-center gap-3 sm:gap-4">
               <span
                 class="grid size-10 shrink-0 place-items-center rounded-full bg-white font-display text-lg font-bold text-black shadow-sm ring-1 shadow-black/[0.04] ring-black/10 sm:size-12 dark:bg-black dark:text-white dark:shadow-none dark:ring-white/15"
@@ -25,14 +26,15 @@ import IconArrow from "@tabler/icons/outline/arrow-up-right.svg?raw";
                   {job.company}
                   {job.url && <Icon svg={IconArrow} class="size-3.5 opacity-50 transition-opacity group-hover/item:opacity-100" />}
                 </span>
-                <span class="block truncate text-xs font-medium text-fg-subtle sm:text-sm">{job.role}</span>
+                <span class="block text-xs font-medium text-fg-subtle sm:truncate sm:text-sm">{job.role}</span>
                 <span class="mt-1 line-clamp-1 text-xs leading-5 text-fg-muted group-open/item:line-clamp-none sm:text-sm">
                   {job.summary}
                 </span>
+                {job.period && <span class="mt-1 block text-xs font-medium text-fg-subtle sm:hidden">{job.period}</span>}
               </span>
             </span>
-            <span class="flex items-center gap-3 pl-[3.25rem] sm:pl-0">
-              {job.period && <span class="text-xs font-medium text-fg-subtle sm:text-sm">{job.period}</span>}
+            <span class="flex shrink-0 items-center gap-3">
+              {job.period && <span class="hidden text-sm font-medium text-fg-subtle sm:inline">{job.period}</span>}
               <span class="grid size-8 shrink-0 place-items-center rounded-full border border-black/[0.08] bg-black/[0.025] text-fg-subtle transition group-open/item:rotate-180 hover:border-black/15 hover:text-black dark:border-white/[0.08] dark:bg-white/[0.035] dark:hover:border-white/15 dark:hover:text-white">
                 <Icon svg={IconChevron} />
                 <span class="sr-only">Ver detalles</span>

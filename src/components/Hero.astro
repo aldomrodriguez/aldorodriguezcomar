@@ -1,9 +1,8 @@
 ---
-import { Image } from "astro:assets";
 import { profile } from "../data/profile";
-import fotoPerfil from "../assets/perfil.webp";
 import Banner from "./Banner.astro";
 import Icon from "./Icon.astro";
+import ProfilePhoto from "./ProfilePhoto.astro";
 import Tactile from "./Tactile.astro";
 import ThemeToggle from "./ThemeToggle.astro";
 import Tooltip from "./Tooltip.astro";
@@ -25,15 +24,7 @@ const socials = [
 
   <div class="-mt-10">
     <div class="mx-4 mb-4 sm:mx-8">
-      <Image
-        src={fotoPerfil}
-        alt={profile.name}
-        widths={[96, 112, 192, 224, 336]}
-        sizes="(min-width: 640px) 112px, 96px"
-        loading="eager"
-        fetchpriority="high"
-        class="relative z-10 size-24 rounded-full object-cover ring-4 ring-white sm:size-28 dark:ring-neutral-950"
-      />
+      <ProfilePhoto />
     </div>
 
     <div class="flex flex-col gap-3 px-4 sm:flex-row sm:items-center sm:justify-between sm:px-8">
