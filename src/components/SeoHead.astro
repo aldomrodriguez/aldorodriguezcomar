@@ -1,0 +1,52 @@
+---
+import { profile } from "../data/profile";
+import { serializeSchema } from "../lib/seo";
+
+export type SeoImage = { src: string; width: number; height: number; alt: string };
+
+type Props = {
+  title: string;
+  description: string;
+  image?: SeoImage | undefined;
+  type?: "website" | "article";
+  schema?: object | undefined;
+  noindex?: boolean;
+};
+
+// Imagen para compartir por defecto (public/og.png).
+const defaultImage: SeoImage = {
+  src: "/og.png",
+  width: 1200,
+  height: 630,
+  alt: `${profile.name}, ${profile.intro.highlight.replace(/\.$/, "")}`,
+};
+
+const { title, description, image = defaultImage, type = "website", schema, noindex = false } = Astro.props;
+const site = Astro.site ?? new URL(profile.siteUrl);
+const canonical = new URL(Astro.url.pathname, site).href;
+const imageUrl = new URL(image.src, site).href;
+---
+
+<title>{title}</title>
+<meta name="description" content={description} />
+<meta name="author" content={profile.name} />
+{noindex ? <meta name="robots" content="noindex" /> : <link rel="canonical" href={canonical} />}
+
+<meta property="og:type" content={type} />
+<meta property="og:site_name" content={profile.name} />
+<meta property="og:locale" content="es_AR" />
+<meta property="og:url" content={canonical} />
+<meta property="og:title" content={title} />
+<meta property="og:description" content={description} />
+<meta property="og:image" content={imageUrl} />
+<meta property="og:image:width" content={String(image.width)} />
+<meta property="og:image:height" content={String(image.height)} />
+<meta property="og:image:alt" content={image.alt} />
+
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={title} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={imageUrl} />
+<meta name="twitter:image:alt" content={image.alt} />
+
+{schema && <script is:inline type="application/ld+json" set:html={serializeSchema(schema)} />}

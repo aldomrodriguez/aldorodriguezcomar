@@ -18,6 +18,15 @@ export const profile = {
   cta: {
     text: "Si llegaste hasta acá, quizás te interese lo que hago.",
   },
+  // Lo que ven Google y las vistas previas al compartir el link.
+  seo: {
+    title: "Aldo Rodriguez · Desarrollador Full Stack en Lobos, Buenos Aires",
+    description:
+      "Desarrollador Full Stack en Lobos, Buenos Aires. Hago sitios web, sistemas a medida, tiendas online y bots de atención con IA para empresas e instituciones.",
+    jobTitle: "Desarrollador Full Stack",
+    locality: "Lobos",
+    region: "Buenos Aires",
+  },
 };
 
 export type Experience = {

@@ -3,10 +3,18 @@ import "../styles/global.css";
 import SideRails from "../components/SideRails.astro";
 import Oneko from "../components/Oneko.astro";
 import ScrollToTop from "../components/ScrollToTop.astro";
+import SeoHead, { type SeoImage } from "../components/SeoHead.astro";
 
-type Props = { title: string; description: string };
+type Props = {
+  title: string;
+  description: string;
+  image?: SeoImage | undefined;
+  type?: "website" | "article";
+  schema?: object | undefined;
+  noindex?: boolean;
+};
 
-const { title, description } = Astro.props;
+const props = Astro.props;
 ---
 
 <!doctype html>
@@ -14,11 +22,7 @@ const { title, description } = Astro.props;
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>{title}</title>
-    <meta name="description" content={description} />
-    <meta property="og:title" content={title} />
-    <meta property="og:description" content={description} />
-    <meta property="og:type" content="website" />
+    <SeoHead {...props} />
     <meta name="theme-color" content="#0a0a0a" />
     <link rel="icon" href="/favicon.ico?v=2" sizes="32x32" />
     <link rel="icon" type="image/svg+xml" href="/favicon.svg?v=2" />

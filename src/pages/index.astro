@@ -8,13 +8,30 @@ import ServiceGrid from "../components/ServiceGrid.astro";
 import Contributions from "../components/Contributions.astro";
 import StackMarquee from "../components/StackMarquee.astro";
 import CallToAction from "../components/CallToAction.astro";
-import { profile } from "../data/profile";
+import { getImage } from "astro:assets";
+import { profile, stack } from "../data/profile";
 import { getProjects } from "../lib/projects";
+import { homeSchema } from "../lib/seo";
+import fotoPerfil from "../assets/perfil.webp";
 
 const projects = await getProjects();
+
+const site = Astro.site ?? new URL(profile.siteUrl);
+const foto = await getImage({ src: fotoPerfil, width: 512 });
+const schema = homeSchema({
+  name: profile.name,
+  jobTitle: profile.seo.jobTitle,
+  description: profile.seo.description,
+  siteUrl: site.href,
+  imageUrl: new URL(foto.src, site).href,
+  sameAs: [profile.socials.github, profile.socials.linkedin],
+  locality: profile.seo.locality,
+  region: profile.seo.region,
+  skills: stack.map((tech) => tech.name),
+});
 ---
 
-<Layout title={`${profile.name} · ${profile.role}`} description={`${profile.intro.highlight} ${profile.intro.body}`}>
+<Layout title={profile.seo.title} description={profile.seo.description} schema={schema}>
   <Hero />
 
   <Section title="Experiencia" id="experiencia">

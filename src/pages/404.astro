@@ -1,0 +1,21 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Icon from "../components/Icon.astro";
+import Tactile from "../components/Tactile.astro";
+import { profile } from "../data/profile";
+import IconArrowLeft from "@tabler/icons/outline/arrow-left.svg?raw";
+---
+
+<!-- nginx la sirve en cualquier URL que no exista; noindex para que Google no la guarde. -->
+<Layout title={`Página no encontrada · ${profile.name}`} description="La página que buscás no existe o cambió de dirección." noindex>
+  <section class="flex min-h-dvh flex-col items-center justify-center px-4 py-16 text-center sm:px-8">
+    <p class="font-display text-6xl font-bold text-fg-subtle sm:text-7xl" aria-hidden="true">404</p>
+    <h1 class="mt-4 font-display text-2xl font-medium sm:text-3xl">Esta página no existe</h1>
+    <p class="mt-3 max-w-sm text-sm leading-relaxed text-fg-muted sm:text-base">Puede que el link esté mal escrito o que la página haya cambiado de dirección.</p>
+    <a href="/" class="mt-8 inline-block rounded-2xl active:opacity-75">
+      <Tactile class="h-9 px-4 text-sm font-medium">
+        <Icon svg={IconArrowLeft} class="size-3.5" /> Volver al inicio
+      </Tactile>
+    </a>
+  </section>
+</Layout>
