@@ -10,8 +10,6 @@ export default defineConfig({
   site: 'https://aldorodriguez.com.ar',
   // Una sola forma por página (/proyectos/kivo/) para que Google no vea duplicados.
   trailingSlash: 'always',
-  // CSS dentro del HTML: el navegador pinta apenas llega la página, sin pedir otro archivo.
-  build: { inlineStylesheets: 'always' },
   integrations: [sitemap({ filter: (page) => !page.endsWith('/404/') })],
   vite: {
     plugins: [tailwindcss()]
