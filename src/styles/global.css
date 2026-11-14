@@ -55,22 +55,20 @@
   }
 }
 
-/* Aparición al hacer scroll: solo se oculta si hay JS y el usuario no pidió menos movimiento. */
+/* Aparición al hacer scroll. Solo se ocultan las secciones que arrancan fuera de pantalla
+   (las marca el script del layout): lo visible al cargar se pinta directo, sin esperar al JS. */
 @media (prefers-reduced-motion: no-preference) {
-  .js [data-reveal] {
-    opacity: 0;
-    transform: translateY(12px);
-    filter: blur(4px);
+  [data-reveal] {
     transition:
       opacity 0.6s ease,
       transform 0.6s ease,
       filter 0.6s ease;
   }
 
-  .js [data-reveal].is-visible {
-    opacity: 1;
-    transform: none;
-    filter: none;
+  [data-reveal].reveal-pending {
+    opacity: 0;
+    transform: translateY(12px);
+    filter: blur(4px);
   }
 }
 
