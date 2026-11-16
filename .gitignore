@@ -4,3 +4,7 @@ node_modules/
 .env
 .env.*
 .DS_Store
+
+# Herramientas locales de desarrollo
+.claude/
+.mcp.json
