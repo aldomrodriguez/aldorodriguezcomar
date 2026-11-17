@@ -1,12 +1,14 @@
 ---
 title: Licitaciones municipales
-description: Micrositio público de licitaciones y concursos de precios, con un panel de carga para el área de Compras. Lo hice para el Municipio de Lobos y el código es abierto para que cualquier municipio lo use con su propia identidad.
+description: Sistema de código abierto para publicar licitaciones y concursos de precios, con un panel de carga para el área de Compras. Cualquier municipio lo puede usar con su propia identidad, y el primero en usarlo es el Municipio de Lobos.
 client: Municipio de Lobos
 role: Diseño y desarrollo full-stack
 year: "2026"
+status: En producción
 tags: [Astro, TypeScript, Tailwind, SQLite, Drizzle, Docker]
 hue: 5
 order: 2
+liveUrl: https://licitaciones.municipiodelobos.gob.ar
 repo: https://github.com/aldomrodriguez/licitaciones-municipio
 cover: ../../assets/proyectos/licitaciones/portada.webp
 coverAlt: Portada de Licitaciones y concursos del Municipio de Lobos, con el buscador, los filtros y el listado de procedimientos de 2026.
@@ -50,9 +52,11 @@ gallery:
 
 ## El proyecto
 
-El Municipio de Lobos publicaba sus licitaciones en una página que se editaba a mano. Este sistema la reemplaza: un micrositio público donde cualquiera consulta los llamados, los resultados y la documentación, y un panel para que el área de Compras cargue cada procedimiento desde el llamado hasta la adjudicación.
+Un micrositio público donde cualquiera consulta los llamados, los resultados y la documentación de las compras de un municipio, y un panel para que el área de Compras cargue cada procedimiento desde el llamado hasta la adjudicación.
 
-Lo hice para Lobos, pero el código no tiene nada de Lobos. El nombre, los colores, el logo, el header, el footer y los textos se configuran desde la sección de identidad del panel, y el repositorio es abierto, con licencia AGPL, para que cualquier municipio lo use.
+Es un proyecto de código abierto, con licencia AGPL, pensado para que lo use cualquier municipio. El código no supone ninguno en particular: el nombre, los colores, el logo, el header, el footer y los textos se configuran desde el panel. El repositorio incluye la guía para desplegarlo y para importar los procedimientos anteriores.
+
+El primero en usarlo es el Municipio de Lobos, en [licitaciones.municipiodelobos.gob.ar](https://licitaciones.municipiodelobos.gob.ar). Reemplazó la página que se editaba a mano, y los procedimientos de 2020 a 2026 se importaron con sus documentos.
 
 ## Cómo funciona
 
