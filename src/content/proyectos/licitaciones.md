@@ -4,7 +4,6 @@ description: Micrositio público de licitaciones y concursos de precios, con un 
 client: Municipio de Lobos
 role: Diseño y desarrollo full-stack
 year: "2026"
-status: En desarrollo
 tags: [Astro, TypeScript, Tailwind, SQLite, Drizzle, Docker]
 hue: 5
 order: 2

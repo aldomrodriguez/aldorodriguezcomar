@@ -54,7 +54,7 @@ const meta = [
   { label: "Rol", value: project.role },
   { label: "Año", value: project.year },
   { label: "Estado", value: project.status },
-];
+].filter((item) => item.value);
 
 // Estilos del Markdown del caso de estudio (sin plugin de tipografía).
 const prose = [

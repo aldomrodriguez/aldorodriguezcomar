@@ -13,7 +13,8 @@ const proyectos = defineCollection({
       client: z.string(),
       role: z.string(),
       year: z.string(),
-      status: z.string(),
+      // Sin estado, la ficha no muestra la fila «Estado».
+      status: z.string().optional(),
       tags: z.array(z.string()),
       // Tono de la portada generada cuando no hay captura.
       hue: z.number(),
