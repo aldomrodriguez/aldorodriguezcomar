@@ -1,6 +1,6 @@
 ---
 title: Licitaciones municipales
-description: Micrositio público de licitaciones y concursos de precios, con un panel de carga para el área de Compras. Lo hice para el Municipio de Lobos y va a quedar abierto para que cualquier municipio lo use con su propia identidad.
+description: Micrositio público de licitaciones y concursos de precios, con un panel de carga para el área de Compras. Lo hice para el Municipio de Lobos y el código es abierto para que cualquier municipio lo use con su propia identidad.
 client: Municipio de Lobos
 role: Diseño y desarrollo full-stack
 year: "2026"
@@ -8,6 +8,7 @@ status: En desarrollo
 tags: [Astro, TypeScript, Tailwind, SQLite, Drizzle, Docker]
 hue: 5
 order: 2
+repo: https://github.com/aldomrodriguez/licitaciones-municipio
 cover: ../../assets/proyectos/licitaciones/portada.webp
 coverAlt: Portada de Licitaciones y concursos del Municipio de Lobos, con el buscador, los filtros y el listado de procedimientos de 2026.
 stats:
@@ -52,7 +53,7 @@ gallery:
 
 El Municipio de Lobos publicaba sus licitaciones en una página que se editaba a mano. Este sistema la reemplaza: un micrositio público donde cualquiera consulta los llamados, los resultados y la documentación, y un panel para que el área de Compras cargue cada procedimiento desde el llamado hasta la adjudicación.
 
-Lo hice para Lobos, pero el código no tiene nada de Lobos. El nombre, los colores, el logo, el header, el footer y los textos se configuran desde la sección de identidad del panel, y el repositorio va a quedar abierto para que cualquier municipio lo use.
+Lo hice para Lobos, pero el código no tiene nada de Lobos. El nombre, los colores, el logo, el header, el footer y los textos se configuran desde la sección de identidad del panel, y el repositorio es abierto, con licencia AGPL, para que cualquier municipio lo use.
 
 ## Cómo funciona
 
